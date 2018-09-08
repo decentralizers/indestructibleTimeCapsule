@@ -42,7 +42,7 @@ contract TimeCapsule is Ownable {
             FileLink : fileLink
         });
 
-        allMessages.push(message);        
+        allMessages.push(message);
         userMessages[msg.sender].push(messageId);
         messagesForUser[recipient].push(messageId);
 
@@ -50,9 +50,7 @@ contract TimeCapsule is Ownable {
     }
 
     function revokeMessage(uint messageId) external payable{
-        // TODO: Implement
-        // retrieve the message
-        // check if you're the sender of the message and the time hasn't passed
+      
         require (allMessages[messageId].Sender == msg.sender, "Only the sender can revoke his message");
 
 
