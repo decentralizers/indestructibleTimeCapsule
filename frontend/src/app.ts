@@ -14,6 +14,7 @@ export class App {
         href: 'search',
         moduleId: PLATFORM.moduleName('pages/search/search'),
         title: 'Search',
+        nav: true,
       },
       {
         route: ['upload', 'upload'],
@@ -21,9 +22,11 @@ export class App {
         href: 'upload',
         moduleId: PLATFORM.moduleName('pages/upload/upload'),
         title: 'Upload',
+        nav: true,
       },
     ]);
 
     this.router = router;
+    console.log(router);
   }
 }

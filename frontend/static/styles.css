@@ -157,3 +157,7 @@ div.au-stagger {
     opacity: 1;
   }
 }
+
+.navbar .navbar-brand img {
+  height: 30px;
+}
