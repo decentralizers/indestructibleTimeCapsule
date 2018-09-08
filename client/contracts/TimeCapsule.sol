@@ -42,7 +42,7 @@ contract TimeCapsule is Ownable {
             FileLink : fileLink
         });
 
-        allMessages[messageId] = message;        
+        allMessages.push(message);        
         userMessages[msg.sender].push(messageId);
         messagesForUser[recipient].push(messageId);
 
