@@ -1,3 +1,38 @@
 <template>
-<h2>upload</h2>
+  <div class="upload container">
+    <h2>Adding data to the contract</h2>
+    <div class="alert alert-dark" role="alert">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis sodales blandit. Vivamus vel lacus augue. Nulla nisi lacus, faucibus id erat et, ultricies condimentum velit. Integer at facilisis justo. In quis tristique nisi. Quisque elit arcu, luctus vitae tortor nec, varius suscipit metus. Duis pellentesque lobortis ante, ut aliquam urna. In massa nulla, scelerisque at sollicitudin non, malesuada nec metus.</p>
+
+    </div>
+    <form class="needs-validation" novalidate>
+      <div class="form-row">
+        <div class="col-md-12 mb-3">
+          <label>Text you wish to preserve:</label>
+          <textarea class="form-control"  rows="3"></textarea>
+        </div>
+      </div>
+      <div class="form-row" >
+        <div class="col-md-10 mb-3" repeat.for="receiver of receivers">
+          <label >Receivers public key:</label>
+          <input type="text" class="form-control" placeholder="0xa22c5fbe..." value.bind="receiver" required>
+          <div class="valid-tooltip">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-2 mb-3">
+          <i class="fa fa-plus" click.delegate="addReceiver()"></i>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-3 mb-3">
+          <label >Granted access date:</label>
+          <input type="date" class="form-control" placeholder="State" required>
+
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Upload</button>
+    </form>
+  </div>
+
 </template>

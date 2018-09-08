@@ -161,3 +161,14 @@ div.au-stagger {
 .navbar .navbar-brand img {
   height: 30px;
 }
+
+.upload h2 {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.upload form i {
+  font-size: 30px;
+  padding-top: 36px;
+  margin-left: 50%;
+}
