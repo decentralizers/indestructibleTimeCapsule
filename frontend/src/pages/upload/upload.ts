@@ -1,0 +1,6 @@
+export class Uplad {
+
+  constructor() {
+  }
+
+}
