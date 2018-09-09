@@ -1,3 +1,38 @@
 <template>
-  <h1 repeat.for="account of accounts">${account}</h1>
+  <div class="container search">
+    <h2>Listing for your account:</h2>
+    <form submit.delegate="upload()">
+      <div class="form-row" >
+        <div class="col-md-6 mb-3" >
+          <label>My public key:</label>
+          <input type="text" class="form-control" value.bind="publicKey">
+        </div>
+        <div class="col-md-6 mb-3" >
+          <label>My private key:</label>
+          <input type="text" class="form-control  is-invalid" value.bind="privateKey">
+          <div class="invalid-feedback">
+            You should never share your private key
+          </div>
+        </div>
+      </div>
+    </form>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">From</th>
+        <th scope="col">Date</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr repeat.for="response of testResponse">
+        <th scope="row">${$index + 1}</th>
+        <td>${response.from}</td>
+        <td>${response.date}</td>
+        <td><button class="btn btn-primary" click.delegate="read(response)">Read</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
