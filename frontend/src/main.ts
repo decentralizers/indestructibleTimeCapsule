@@ -24,6 +24,10 @@ export async function configure(aurelia: Aurelia) {
     config
       .useStandardConfiguration()
       .withBaseUrl('//localhost:3000')
+      .withDefaults({
+        credentials: 'omit',
+        mode: 'cors',
+      })
   });
   container.registerInstance('BlockchainHttpClient', blockchain);
 
