@@ -17,6 +17,7 @@ cffi = ">=1.7"
 requests = "*"
 flask = "*"
 ipfsapi = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest = "*"

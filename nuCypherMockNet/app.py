@@ -4,11 +4,14 @@ from umbral import  config as uconfig
 from umbral.curve import SECP256K1
 import msgpack
 from umbral.signing import Signer
+from flask_cors import CORS, cross_origin
 from nucypher import MockNetwork
 import base64
 import json
 import ipfsapi
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 config = ""
 bob_pubkey = ""
@@ -49,20 +52,22 @@ def gen_alice():
     
 @app.route('/test', methods=["GET"])
 def Test():
-    poruka = "Testiranje"
-    hash = api.add_json(poruka)
-    return hash
+    # poruka = "Testiranje"
+    # hash = api.add_json(poruka)
+    alice_pubkey, alice_privkey = gen_alice()
+    return bytes_to_string(alice_pubkey.to_bytes()) + "\n" + bytes_to_string(alice_privkey.to_bytes())
     # return "Amazing!!!"
 
 @app.route('/encrypt', methods=["POST"])
+@cross_origin()
 def encrypt():
     # Get data from request
     json_data = json.loads(request.data.decode('utf-8'))
     # json_data = json.loads("{ \"data\": \"TestiranjeEncrypt\", \"date\":\"2017-09-11\", \"recievers\" : [ \"publickey1\", \"publickey1\" ] }")
-    data = json_data["data"].encode('utf-8')
-    dateString = json_data["date"]
+    data = json_data["Data"].encode('utf-8')
+    dateString = json_data["Date"]
     print(dateString)
-    recievers_key = json_data["recievers"]
+    recievers_key = json_data["Receivers"]
  
     alice_pubkey, alice_privkey = gen_alice()
     
@@ -98,6 +103,7 @@ def encrypt():
 
 
 @app.route('/decrypt', methods=["POST"])
+@cross_origin()
 def decrypt():
     # Get data from request
     json_data = json.loads(request.data.decode('utf-8'))
