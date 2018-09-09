@@ -1,6 +1,8 @@
 import {inject} from 'aurelia-framework';
 import Web3 from 'web3';
 
+declare let web3: any;
+
 @inject('BlockchainHttpClient')
 export class Uplad {
   private receivers: Array<string> = [];
@@ -14,14 +16,14 @@ export class Uplad {
     this.blockchain = blockchain;
 
     if (typeof web3 !== 'undefined') {
-         web3 = new Web3(web3.currentProvider);
-     } else {
-         // set the provider you want from Web3.providers
-         web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-     }
+      web3 = new Web3(web3.currentProvider);
+    } else {
+      // set the provider you want from Web3.providers
+      web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+    }
 
-     //web3.eth.defaultAccount = web3.eth.accounts[0];
-     this.web3 = web3;
+    //web3.eth.defaultAccount = web3.eth.accounts[0];
+    this.web3 = web3;
 
   }
 
@@ -32,102 +34,131 @@ export class Uplad {
     }
   }
 
-  private async prepareContract(): void {
+  private async prepareContract(): Promise<void> {
 
-    const abi = [ { constant: false,
+    const abi = [{
+      constant: false,
       inputs: [],
       name: 'renounceOwnership',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function' },
-    { constant: true,
-      inputs: [],
-      name: 'owner',
-      outputs: [ [Object] ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function' },
-    { constant: true,
-      inputs: [],
-      name: 'isOwner',
-      outputs: [ [Object] ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function' },
-    { constant: true,
-      inputs: [ [Object], [Object] ],
-      name: 'userMessages',
-      outputs: [ [Object] ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function' },
-    { constant: true,
-      inputs: [ [Object], [Object] ],
-      name: 'messagesForUser',
-      outputs: [ [Object] ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function' },
-    { constant: false,
-      inputs: [ [Object] ],
-      name: 'transferOwnership',
-      outputs: [],
-      payable: false,
-      stateMutability: 'nonpayable',
-      type: 'function' },
-    { inputs: [],
-      payable: false,
-      stateMutability: 'nonpayable',
-      type: 'constructor' },
-    { anonymous: false,
-      inputs: [ [Object] ],
-      name: 'MessageCreated',
-      type: 'event' },
-    { anonymous: false,
-      inputs: [ [Object] ],
-      name: 'MessageRevoked',
-      type: 'event' },
-    { anonymous: false,
-      inputs: [ [Object] ],
-      name: 'OwnershipRenounced',
-      type: 'event' },
-    { anonymous: false,
-      inputs: [ [Object], [Object] ],
-      name: 'OwnershipTransferred',
-      type: 'event' },
-    { constant: false,
-      inputs:
-       [ [Object], [Object], [Object], [Object], [Object], [Object] ],
-      name: 'createMessage',
-      outputs: [],
-      payable: false,
-      stateMutability: 'nonpayable',
-      type: 'function' },
-    { constant: false,
-      inputs: [ [Object] ],
-      name: 'revokeMessage',
-      outputs: [],
-      payable: true,
-      stateMutability: 'payable',
-      type: 'function' },
-    { constant: true,
-      inputs: [],
-      name: 'getMessagesForUser',
-      outputs: [ [Object] ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function' },
-    { constant: true,
-      inputs: [],
-      name: 'getMessagesByUser',
-      outputs: [ [Object] ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function' } ];
+      type: 'function'
+    },
+      {
+        constant: true,
+        inputs: [],
+        name: 'owner',
+        outputs: [[Object]],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'isOwner',
+        outputs: [[Object]],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [[Object], [Object]],
+        name: 'userMessages',
+        outputs: [[Object]],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [[Object], [Object]],
+        name: 'messagesForUser',
+        outputs: [[Object]],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: false,
+        inputs: [[Object]],
+        name: 'transferOwnership',
+        outputs: [],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        inputs: [],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'constructor'
+      },
+      {
+        anonymous: false,
+        inputs: [[Object]],
+        name: 'MessageCreated',
+        type: 'event'
+      },
+      {
+        anonymous: false,
+        inputs: [[Object]],
+        name: 'MessageRevoked',
+        type: 'event'
+      },
+      {
+        anonymous: false,
+        inputs: [[Object]],
+        name: 'OwnershipRenounced',
+        type: 'event'
+      },
+      {
+        anonymous: false,
+        inputs: [[Object], [Object]],
+        name: 'OwnershipTransferred',
+        type: 'event'
+      },
+      {
+        constant: false,
+        inputs: [[Object], [Object], [Object], [Object], [Object], [Object]],
+        name: 'createMessage',
+        outputs: [],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        constant: false,
+        inputs: [[Object]],
+        name: 'revokeMessage',
+        outputs: [],
+        payable: true,
+        stateMutability: 'payable',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'getMessagesForUser',
+        outputs: [[Object]],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'getMessagesByUser',
+        outputs: [[Object]],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      }];
 
-      const acc = await this.web3.eth.getAccounts();
-      this.web3.eth.defaultAccount = acc[0];
+    const acc = await this.web3.eth.getAccounts();
+    this.web3.eth.defaultAccount = acc[0];
     const addr = '0x27a6d1f2e561721580eba5f39d94f6193e2df860';
     var TimeCapsule = new this.web3.eth.Contract(abi, addr);
 
@@ -138,7 +169,7 @@ export class Uplad {
 
   public async upload(): Promise<void> {
     try {
-      this.prepareContract()
+      this.prepareContract();
       let postData: any = {
         Data: this.data,
         Date: this.date,
