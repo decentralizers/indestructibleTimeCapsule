@@ -160,7 +160,7 @@ export class Uplad {
     const acc = await this.web3.eth.getAccounts();
     this.web3.eth.defaultAccount = acc[0];
     const addr = '0x27a6d1f2e561721580eba5f39d94f6193e2df860';
-    var TimeCapsule = new this.web3.eth.Contract(abi, addr);
+    const TimeCapsule = new this.web3.eth.Contract(abi, addr);
 
 
     let a = await TimeCapsule.methods.getMessagesForUser().call();
@@ -169,7 +169,7 @@ export class Uplad {
 
   public async upload(): Promise<void> {
     try {
-      this.prepareContract();
+      await this.prepareContract();
       let postData: any = {
         Data: this.data,
         Date: this.date,
