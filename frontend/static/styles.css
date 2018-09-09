@@ -167,6 +167,11 @@ div.au-stagger {
   text-align: center;
 }
 
+.search h2 {
+  margin: 30px auto;
+  text-align: center;
+}
+
 .upload form i {
   font-size: 30px;
   padding-top: 36px;
